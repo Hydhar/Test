@@ -1,0 +1,29 @@
+1st Round 
+-----------
+git init
+
+git config --global user.name "your user name"
+git config --global user.email "email id"
+
+git status
+
+git add -A
+git add foldername
+git add filename.txt
+git add *.java
+
+git remote add origin "remotehub url"
+
+git push -u origin master
+
+2nd Round
+--------------
+git add -A
+
+git commit -m "2nd commit"
+
+git push -u origin master
+
+---------------------------
+git pull -> get files from github to workspace not local repository
+git clone "remote hub url" <folder name>
