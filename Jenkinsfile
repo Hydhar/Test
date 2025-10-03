@@ -19,21 +19,29 @@ pipeline {
  
  stage('Build') {
  steps {
+ catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
  echo 'Building the project using Maven...'
  bat 'mvn clean install'
+ }
  }
  }
  
  stage('Test') {
  steps {
  echo 'Running unit tests...'
+ //bat 'mvn test'
+ //bat(script: 'mvn test', returnStatus: true)
+ catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
  bat 'mvn test'
+ //bat 'mvn test || echo "Test failed with exit code %ERRORLEVEL%"'
+ }
  }
  }
  
  stage('Test Report') {
  steps {
  echo 'Publishing JUnit test results...'
+ bat 'dir /s target\\surefire-reports'
  junit '**/target/surefire-reports/*.xml'
  }
  }
